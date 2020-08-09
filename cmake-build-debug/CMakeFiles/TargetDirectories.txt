@@ -1,0 +1,3 @@
+C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug/CMakeFiles/MyPhysics.dir
+C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug/CMakeFiles/rebuild_cache.dir

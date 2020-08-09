@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="MyPhysics"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="MyPhysics">
+				<Option output="C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug/MyPhysics.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/User/Documents/ClionProjects/SDL2-2.0.12/include"/>
+					<Add directory="C:/Users/User/Documents/ClionProjects/glm/glm"/>
+					<Add directory="C:/Users/User/Documents/ClionProjects/glew-2.2.0-win32/glew-2.2.0/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 MyPhysics"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="MyPhysics/fast">
+				<Option output="C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug/MyPhysics.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/User/Documents/ClionProjects/SDL2-2.0.12/include"/>
+					<Add directory="C:/Users/User/Documents/ClionProjects/glm/glm"/>
+					<Add directory="C:/Users/User/Documents/ClionProjects/glew-2.2.0-win32/glew-2.2.0/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 MyPhysics/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/User/Documents/ClionProjects/MyPhysics-master/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\User\Documents\ClionProjects\MyPhysics-master\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Box.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Box.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Camera2D.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Camera2D.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Circle.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Circle.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Figure.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Figure.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/GLTexture.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/IOfile.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/IOfile.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/ImageLoader.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/ImageLoader.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/InputManager.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/InputManager.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/MainGame.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/MainGame.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Math2D.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Math2D.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/ObjectsGroup.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/ObjectsGroup.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Shaders.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Shaders.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/TextureLoader.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/TextureLoader.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/Vertex.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/errors.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/errors.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/main.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/picoPNG.cpp">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/picoPNG.h">
+			<Option target="MyPhysics"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Documents/ClionProjects/MyPhysics-master/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
