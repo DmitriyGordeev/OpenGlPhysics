@@ -8,7 +8,7 @@
 
 #include <gtx\transform.hpp>
 
-float TESTANGLE = 0.0;
+float TEST_ANGLE = 0.0;
 
 MainGame::MainGame()
 {
@@ -30,20 +30,20 @@ void MainGame::run()
 	_pFigures.push_back(new Circle(-100.0f, 1500.0f, 50.0f));
 	_pFigures[0]->setVel(0.0f, -0.1f);
 
-	//_pFigures.push_back(new Circle(-1500.0f, 200, 50.0f));
-	//_pFigures[0]->setVel(3.0f, 0.0f);
+    //_pFigures.push_back(new Circle(-1500.0f, 200, 50.0f));
+    //_pFigures[0]->setVel(3.0f, 0.0f);
 
-	_pFigures[0]->setMass(5.0f);
+    _pFigures[0]->setMass(5.0f);
 
-	_pFigures.push_back(new Box(-100.0f, 200.0f, 500.0f, 400.0f));
-	_pFigures[1]->setAngle(M_PI / 12);
-	//_pFigures[1]->setMass(2.0f);
-	
-	_groundBox = new Box(0.0f, -750.0f, 3000.0f, 1500.0f);
-	_groundBox->setAngle(TESTANGLE);
+    _pFigures.push_back(new Box(-100.0f, 200.0f, 500.0f, 400.0f));
+    _pFigures[1]->setAngle(M_PI / 12);
+    //_pFigures[1]->setMass(2.0f);
 
-	initSystems();
-	gameLoop();
+    _groundBox = new Box(0.0f, -750.0f, 3000.0f, 1500.0f);
+    _groundBox->setAngle(TEST_ANGLE);
+
+    initSystems();
+    gameLoop();
 }
 
 void MainGame::initSystems()
@@ -206,14 +206,13 @@ void MainGame::_figuresDraw()
 	//_pFigures[0]->collision(_groundBox);
 	_pFigures[0]->collision(_pFigures[1]);
 
-	for (int i = 0; i < 1; i++)
-	{
-		//_pFigures[i]->lineReflection(glm::vec2(-1500.0f, -1500 * tanf(TESTANGLE)), glm::vec2(1500.0f, 1500 * tanf(TESTANGLE)));
-		_pFigures[i]->force(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass());
-		//std::cout << "gravity:" << glm::length(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass()) << std::endl;
-		_pFigures[i]->move();
-		_pFigures[i]->rotate();
-	}
+	for (int i = 0; i < 1; i++) {
+        //_pFigures[i]->lineReflection(glm::vec2(-1500.0f, -1500 * tanf(TEST_ANGLE)), glm::vec2(1500.0f, 1500 * tanf(TEST_ANGLE)));
+        _pFigures[i]->force(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass());
+        //std::cout << "gravity:" << glm::length(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass()) << std::endl;
+        _pFigures[i]->move();
+        _pFigures[i]->rotate();
+    }
 
 
 	//Drawing all objects on the scene:
