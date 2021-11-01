@@ -60,7 +60,7 @@ Figure::~Figure()
 
 void Figure::draw(ObjectsGroup& objGroup)
 {
-	Color color;
+	Color color {};
 	color.r = 255; color.g = 255; color.b = 255, color.a = 255;
 
 	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
@@ -113,7 +113,7 @@ void Figure::setVel(float vx, float vy)
 	_vel.y = vy;
 }
 
-void Figure::setVel(glm::vec2 vel)
+void Figure::setVel(const glm::vec2& vel)
 {
 	_vel = vel;
 }
@@ -139,10 +139,10 @@ void Figure::transform(const glm::mat2x2& trMat)
 	_trMat = trMat;
 }
 
-void Figure::force(const glm::vec2 force)
+void Figure::applyForce(const glm::vec2& impulse)
 {
 	if (_mass != 0.0f)
-		_vel += force / _mass;
+		_vel += impulse / _mass;
 }
 
 void Figure::move()
@@ -173,7 +173,7 @@ void Figure::lineReflection(const glm::vec2& A, const glm::vec2& B)
 	
 	if ((rotated_Pos.x >= rotated_A.x) && (rotated_Pos.x <= rotated_B.x))
 	{
-		std::cout << "Range = " << abs(rotated_Pos.y - rotated_A.y) << std::endl;
+		std::cout << "range = " << abs(rotated_Pos.y - rotated_A.y) << std::endl;
 
 		if (abs(rotated_Pos.y - rotated_A.y) <= 10.0f)
 		{
@@ -181,7 +181,7 @@ void Figure::lineReflection(const glm::vec2& A, const glm::vec2& B)
 
 			//rotate velocity back:
 			glm::vec2 newVel = glm::rotate(rotated_Vel, angle);
-			std::cout << "LINECollided!:  " << "newVel.x = " << newVel.x << " newVel.y = " << newVel.y << std::endl;
+			std::cout << "collision:  " << "newVel.x = " << newVel.x << " newVel.y = " << newVel.y << std::endl;
 			setVel(newVel.x, newVel.y);
 		}
 	}

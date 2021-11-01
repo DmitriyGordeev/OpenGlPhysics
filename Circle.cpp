@@ -19,7 +19,7 @@ void Circle::draw(ObjectsGroup& objGroup)
 
 void Circle::collision(Figure* pfig)
 {
-	if (pfig->getBoundType() == BoundType::CIRCLE)
+	if (pfig->getBoundType() == HitboxType::CIRCLE)
 	{
 		glm::vec2 center = getCenter();
 		glm::vec2 pfigCenter = pfig->getPos();
@@ -50,7 +50,7 @@ void Circle::collision(Figure* pfig)
 			pfig->setVel(pfigVel.x, pfigVel.y);
 		}
 	}
-	else if (pfig->getBoundType() == BoundType::BOX)
+	else if (pfig->getBoundType() == HitboxType::BOX)
 	{
 		glm::vec2* box_dots = pfig->getDots();
 		glm::vec2 box_center = pfig->getPos();
@@ -154,7 +154,7 @@ void Circle::lineReflection(const glm::vec2& A, const glm::vec2& B)
 
 			//Surface reaction:
 			glm::vec2 reaction = glm::rotate(glm::vec2(0.0f, _mass * grav * cosf(angle)), angle);
-			force(reaction);
+            applyForce(reaction);
 
 			//Angle velocity direction and value:
 		    setAngleVel(angleVel);

@@ -152,7 +152,7 @@ void MainGame::processInput()
 	if (_input.isKeyPressed(SDL_BUTTON_LEFT))
 	{
 		glm::vec2 mouseCoords = _input.getMouseCoords();
-		mouseCoords = _camera.convertToWorldCoords(mouseCoords);
+		_camera.convertToWorldCoords(mouseCoords);
 	}
 }
 
@@ -209,7 +209,7 @@ void MainGame::_figuresDraw()
 
 	for (int i = 0; i < 1; i++) {
         //_pFigures[i]->lineReflection(glm::vec2(-1500.0f, -1500 * tanf(TEST_ANGLE)), glm::vec2(1500.0f, 1500 * tanf(TEST_ANGLE)));
-        _pFigures[i]->force(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass());
+        _pFigures[i]->applyForce(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass());
         //std::cout << "gravity:" << glm::length(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass()) << std::endl;
         _pFigures[i]->move();
         _pFigures[i]->rotate();

@@ -6,19 +6,19 @@ class Circle : public Figure
 public:
 	Circle() : Figure()
 	{
-		_boundType = BoundType::CIRCLE;
+		_boundType = HitboxType::CIRCLE;
 	}
 	Circle(float x, float y, float radius) : Figure(x, y)
 	{
 		_geo.z = 2 * radius;
 		_geo.w = 2 * radius;
-		_boundType = BoundType::CIRCLE;
+		_boundType = HitboxType::CIRCLE;
 	}
 	Circle(const glm::vec2& pos, float radius) : Figure(pos)
 	{
 		_geo.z = 2 * radius;
 		_geo.w = 2 * radius;
-		_boundType = BoundType::CIRCLE;
+		_boundType = HitboxType::CIRCLE;
 	}
 	~Circle() {}
 

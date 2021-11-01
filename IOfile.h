@@ -5,6 +5,6 @@
 class IOfile
 {
 public:
-	static bool readToBuffer(std::string filePath, std::vector<unsigned char>& buffer);
+	static bool readToBuffer(const std::string& filePath, std::vector<unsigned char>& buffer);
 };
 

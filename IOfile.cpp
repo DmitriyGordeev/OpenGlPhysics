@@ -1,7 +1,7 @@
 #include "IOfile.h"
 #include <fstream>
 
-bool IOfile::readToBuffer(std::string filename, std::vector<unsigned char>& buffer)
+bool IOfile::readToBuffer(const std::string& filename, std::vector<unsigned char>& buffer)
 {
 	std::ifstream file(filename, std::ios::binary);
 	if (file.fail())
