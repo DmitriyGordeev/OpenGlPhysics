@@ -35,9 +35,10 @@ void MainGame::run()
 
     _pFigures[0]->setMass(5.0f);
 
-    _pFigures.push_back(new Box(-100.0f, 200.0f, 500.0f, 400.0f));
-    _pFigures[1]->setAngle(M_PI / 12);
-    //_pFigures[1]->setMass(2.0f);
+    _pFigures.push_back(new Box(100.0f, 300.0f, 500.0f, 400.0f));
+    _pFigures[1]->setAngle(M_PI / 19);
+//    _pFigures[1]->setMass(2.0f);
+//    _pFigures[1]->setVel(0.0f, -0.1f);
 
     _groundBox = new Box(0.0f, -750.0f, 3000.0f, 1500.0f);
     _groundBox->setAngle(TEST_ANGLE);
