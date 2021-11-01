@@ -59,15 +59,15 @@ private:
 	void _sortObjects();
 	void _createVertexArray();
 
-	static bool _compareFTB(Object* a, Object* b)
+	static bool _compareFTB(const std::unique_ptr<Object>& a, const std::unique_ptr<Object>& b)
 	{
 		return (a->depth < b->depth);
 	}
-	static bool _compareBTF(Object* a, Object* b)
+	static bool _compareBTF(const std::unique_ptr<Object>& a, const std::unique_ptr<Object>& b)
 	{
 		return (a->depth > b->depth);
 	}
-	static bool _compareTEX(Object* a, Object* b)
+	static bool _compareTEX(const std::unique_ptr<Object>& a, const std::unique_ptr<Object>& b)
 	{
 		return (a->texture < b->texture);
 	}
