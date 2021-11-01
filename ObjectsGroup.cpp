@@ -9,22 +9,20 @@ ObjectsGroup::ObjectsGroup()
 	_vao = 0;
 }
 
-ObjectsGroup::~ObjectsGroup()
-{
-
-}
+ObjectsGroup::~ObjectsGroup() = default;
 
 void ObjectsGroup::init()
 {
 	_createVertexArray();
 }
 
-void ObjectsGroup::pre(ObjectSortType sortType /* = TEXTURE */)
+void ObjectsGroup::cleanUp(ObjectSortType sortType /* = TEXTURE */)
 {
 	_sortType = sortType;
 
-	for (int i = 0; i < _pObjects.size(); i++)
-		delete _pObjects[i];
+//	for (int i = 0; i < _pObjects.size(); i++)
+//		delete _pObjects[i];
+    _pObjects.clear();
 
 	_rgs.clear();
 }
@@ -38,9 +36,11 @@ void ObjectsGroup::post()
 
 void ObjectsGroup::addInGroup(const glm::vec4& destRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color)
 {
-	Object* newObject = new Object;
-	newObject->texture = texture;
-	newObject->depth = depth;
+//	Object* newObject = new Object;
+    std::unique_ptr<Object> newObject = std::make_unique<Object>();
+
+    newObject->texture = texture;
+    newObject->depth = depth;
 
 	//Rotating by angle:
 	glm::vec2 topLeft(destRect.x, destRect.y + destRect.w);
@@ -64,28 +64,28 @@ void ObjectsGroup::addInGroup(const glm::vec4& destRect, const glm::vec4& uvRect
 	//uv_bottomRight = glm::rotate(uv_bottomRight, angle);
 
 	//Assigning values to object properties:
-	newObject->topLeft.color = color;
-	newObject->topLeft.setPos(topLeft.x, topLeft.y); 
-	newObject->topLeft.setUV(uv_topLeft.x, uv_topLeft.y);
+    newObject->topLeft.color = color;
+    newObject->topLeft.setPos(topLeft.x, topLeft.y);
+    newObject->topLeft.setUV(uv_topLeft.x, uv_topLeft.y);
 
-	newObject->bottomLeft.color = color;
-	newObject->bottomLeft.setPos(bottomLeft.x, bottomLeft.y);
-	newObject->bottomLeft.setUV(uv_bottomLeft.x, uv_bottomLeft.y);
+    newObject->bottomLeft.color = color;
+    newObject->bottomLeft.setPos(bottomLeft.x, bottomLeft.y);
+    newObject->bottomLeft.setUV(uv_bottomLeft.x, uv_bottomLeft.y);
 
-	newObject->topRight.color = color;
-	newObject->topRight.setPos(topRight.x, topRight.y);
-	newObject->topRight.setUV(uv_topRight.x, uv_topRight.y);
+    newObject->topRight.color = color;
+    newObject->topRight.setPos(topRight.x, topRight.y);
+    newObject->topRight.setUV(uv_topRight.x, uv_topRight.y);
 
-	newObject->bottomRight.color = color;
-	newObject->bottomRight.setPos(bottomRight.x, bottomRight.y);
-	newObject->bottomRight.setUV(uv_bottomRight.x, uv_bottomRight.y);
+    newObject->bottomRight.color = color;
+    newObject->bottomRight.setPos(bottomRight.x, bottomRight.y);
+    newObject->bottomRight.setUV(uv_bottomRight.x, uv_bottomRight.y);
 
-	_pObjects.push_back(newObject);
+	_pObjects.push_back(std::move(newObject));
 }
 
 void ObjectsGroup::addInGroupCenter(const glm::vec4& centerRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color)
 {
-	Object* newObject = new Object;
+    std::unique_ptr<Object> newObject = std::make_unique<Object>();
 	newObject->texture = texture;
 	newObject->depth = depth;
 
@@ -122,12 +122,12 @@ void ObjectsGroup::addInGroupCenter(const glm::vec4& centerRect, const glm::vec4
 	newObject->bottomRight.setPos(bottomRight.x, bottomRight.y);
 	newObject->bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
 
-	_pObjects.push_back(newObject);
+	_pObjects.push_back(std::move(newObject));
 }
 
 void ObjectsGroup::addInGroupTransform(const glm::vec4& centerRect, const glm::vec4& uvRect, glm::mat2x2 trMat, GLuint texture, float depth, const Color& color)
 {
-	Object* newObject = new Object;
+    std::unique_ptr<Object> newObject = std::make_unique<Object>();
 	newObject->texture = texture;
 	newObject->depth = depth;
 
@@ -166,7 +166,7 @@ void ObjectsGroup::addInGroupTransform(const glm::vec4& centerRect, const glm::v
 	newObject->bottomRight.setPos((center + bottomRight).x, (center + bottomRight).y);
 	newObject->bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
 
-	_pObjects.push_back(newObject);
+	_pObjects.push_back(std::move(newObject));
 }
 
 void ObjectsGroup::renderGroup()
@@ -176,7 +176,7 @@ void ObjectsGroup::renderGroup()
 	for (int i = 0; i < _rgs.size(); i++)
 	{
 		glBindTexture(GL_TEXTURE_2D, _rgs[i].texture);
-		glDrawArrays(GL_TRIANGLES, _rgs[i].offset, _rgs[i].numVerticies);
+		glDrawArrays(GL_TRIANGLES, _rgs[i].offset, _rgs[i].numVertexes);
 	}
 
 	glBindVertexArray(0);
@@ -184,8 +184,8 @@ void ObjectsGroup::renderGroup()
 
 void ObjectsGroup::_createRenderGroups()
 {
-	std::vector<Vertex> verts;
-	verts.resize(_pObjects.size() * 6);
+	std::vector<Vertex> vertexes;
+	vertexes.resize(_pObjects.size() * 6);
 
 	if (_pObjects.empty())
 		return;
@@ -193,12 +193,12 @@ void ObjectsGroup::_createRenderGroups()
 	int offset = 0;
 	int cv = 0; // current vertex
 	_rgs.emplace_back(0, 6, _pObjects[0]->texture);
-	verts[cv++] = _pObjects[0]->topLeft;
-	verts[cv++] = _pObjects[0]->bottomLeft;
-	verts[cv++] = _pObjects[0]->bottomRight;
-	verts[cv++] = _pObjects[0]->bottomRight;
-	verts[cv++] = _pObjects[0]->topRight;
-	verts[cv++] = _pObjects[0]->topLeft;
+    vertexes[cv++] = _pObjects[0]->topLeft;
+    vertexes[cv++] = _pObjects[0]->bottomLeft;
+    vertexes[cv++] = _pObjects[0]->bottomRight;
+    vertexes[cv++] = _pObjects[0]->bottomRight;
+    vertexes[cv++] = _pObjects[0]->topRight;
+    vertexes[cv++] = _pObjects[0]->topLeft;
 	offset += 6;
 
 	for (int co = 1; co < _pObjects.size(); co++)
@@ -206,20 +206,20 @@ void ObjectsGroup::_createRenderGroups()
 		if (_pObjects[co]->texture != _pObjects[co - 1]->texture)
 			_rgs.emplace_back(offset, 6, _pObjects[co]->texture);
 		else
-			_rgs.back().numVerticies += 6;
+			_rgs.back().numVertexes += 6;
 
-		verts[cv++] = _pObjects[co]->topLeft;
-		verts[cv++] = _pObjects[co]->bottomLeft;
-		verts[cv++] = _pObjects[co]->bottomRight;
-		verts[cv++] = _pObjects[co]->bottomRight;
-		verts[cv++] = _pObjects[co]->topRight;
-		verts[cv++] = _pObjects[co]->topLeft;
+        vertexes[cv++] = _pObjects[co]->topLeft;
+        vertexes[cv++] = _pObjects[co]->bottomLeft;
+        vertexes[cv++] = _pObjects[co]->bottomRight;
+        vertexes[cv++] = _pObjects[co]->bottomRight;
+        vertexes[cv++] = _pObjects[co]->topRight;
+        vertexes[cv++] = _pObjects[co]->topLeft;
 		offset += 6;
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	glBufferData(GL_ARRAY_BUFFER, verts.size() * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, verts.size() * sizeof(Vertex), verts.data());
+	glBufferData(GL_ARRAY_BUFFER, vertexes.size() * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, vertexes.size() * sizeof(Vertex), vertexes.data());
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -238,6 +238,9 @@ void ObjectsGroup::_sortObjects()
 	case ObjectSortType::TEXTURE:
 		std::stable_sort(_pObjects.begin(), _pObjects.end(), _compareTEX);
 		break;
+
+    default:
+        break;
 	}
 }
 

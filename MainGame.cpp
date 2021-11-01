@@ -190,7 +190,7 @@ void MainGame::drawGame()
 	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
 	//Draws all figure
-	_objectsGroup.pre();
+    _objectsGroup.cleanUp();
 	_figuresDraw();
 	_objectsGroup.post();
 	_objectsGroup.renderGroup();

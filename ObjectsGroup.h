@@ -3,6 +3,7 @@
 #include <glm.hpp>
 #include "Vertex.h"
 #include <vector>
+#include <memory>
 
 
 enum class ObjectSortType 
@@ -26,17 +27,16 @@ struct Object
 
 class RenderGroup
 {
-	//stores offset in vertex array object
 public:
 	RenderGroup(GLuint Offset, GLuint NV, GLuint Texture)
 	{
 		offset = Offset;
-		numVerticies = NV;
+        numVertexes = NV;
 		texture = Texture;
 	}
 
 	GLuint offset;
-	GLuint numVerticies;
+	GLuint numVertexes;
 	GLuint texture;
 };
 
@@ -47,7 +47,7 @@ public:
 	~ObjectsGroup();
 
 	void init();
-	void pre(ObjectSortType sortType = ObjectSortType::TEXTURE);
+	void cleanUp(ObjectSortType sortType = ObjectSortType::TEXTURE);
 	void post();
 	void addInGroup(const glm::vec4& destRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color);
 	void addInGroupCenter(const glm::vec4& centerRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color);
@@ -75,9 +75,9 @@ private:
 	GLuint _vbo;
 	GLuint _vao;
 	
-	ObjectSortType _sortType;
+	ObjectSortType _sortType {ObjectSortType::NONE};
 
-	std::vector<Object*> _pObjects;
+	std::vector<std::unique_ptr<Object>> _pObjects;
 	std::vector<RenderGroup> _rgs;
 };
 

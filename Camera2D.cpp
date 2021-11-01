@@ -11,9 +11,7 @@ Camera2D::Camera2D() : _needMatrixUpdate(true),
 {
 }
 
-Camera2D::~Camera2D()
-{
-}
+Camera2D::~Camera2D() = default;
 
 void Camera2D::init(int screenWidth, int screenHeight)
 {
