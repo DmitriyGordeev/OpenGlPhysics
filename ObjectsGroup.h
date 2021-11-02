@@ -78,6 +78,6 @@ private:
 	ObjectSortType _sortType {ObjectSortType::NONE};
 
 	std::vector<std::unique_ptr<Object>> _pObjects;
-	std::vector<RenderGroup> _rgs;
+	std::vector<std::unique_ptr<RenderGroup>> _rgs;
 };
 

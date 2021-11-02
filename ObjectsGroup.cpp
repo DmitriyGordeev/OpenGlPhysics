@@ -174,8 +174,8 @@ void ObjectsGroup::renderGroup()
 	glBindVertexArray(_vao);
 
     for(const auto& e : _rgs) {
-        glBindTexture(GL_TEXTURE_2D, e.texture);
-        glDrawArrays(GL_TRIANGLES, e.offset, e.numVertexes);
+        glBindTexture(GL_TEXTURE_2D, e->texture);
+        glDrawArrays(GL_TRIANGLES, e->offset, e->numVertexes);
     }
 
 	glBindVertexArray(0);
@@ -191,7 +191,7 @@ void ObjectsGroup::_createRenderGroups()
 
 	int offset = 0;
 	int cv = 0; // current vertex
-	_rgs.emplace_back(0, 6, _pObjects[0]->texture);
+	_rgs.emplace_back(std::make_unique<RenderGroup>(0, 6, _pObjects[0]->texture));
     vertexes[cv++] = _pObjects[0]->topLeft;
     vertexes[cv++] = _pObjects[0]->bottomLeft;
     vertexes[cv++] = _pObjects[0]->bottomRight;
@@ -203,9 +203,9 @@ void ObjectsGroup::_createRenderGroups()
 	for (int co = 1; co < _pObjects.size(); co++)
 	{
 		if (_pObjects[co]->texture != _pObjects[co - 1]->texture)
-			_rgs.emplace_back(offset, 6, _pObjects[co]->texture);
+			_rgs.emplace_back(std::make_unique<RenderGroup>(offset, 6, _pObjects[co]->texture));
 		else
-			_rgs.back().numVertexes += 6;
+			_rgs.back()->numVertexes += 6;
 
         vertexes[cv++] = _pObjects[co]->topLeft;
         vertexes[cv++] = _pObjects[co]->bottomLeft;
