@@ -125,7 +125,7 @@ void ObjectsGroup::addInGroupCenter(const glm::vec4& centerRect, const glm::vec4
 	_pObjects.push_back(std::move(newObject));
 }
 
-void ObjectsGroup::addInGroupTransform(const glm::vec4& centerRect, const glm::vec4& uvRect, glm::mat2x2 trMat, GLuint texture, float depth, const Color& color)
+void ObjectsGroup::addInGroupTransform(const glm::vec4& centerRect, const glm::vec4& uvRect, const glm::mat2x2& trMat, GLuint texture, float depth, const Color& color)
 {
     std::unique_ptr<Object> newObject = std::make_unique<Object>();
 	newObject->texture = texture;
@@ -173,11 +173,10 @@ void ObjectsGroup::renderGroup()
 {
 	glBindVertexArray(_vao);
 
-	for (int i = 0; i < _rgs.size(); i++)
-	{
-		glBindTexture(GL_TEXTURE_2D, _rgs[i].texture);
-		glDrawArrays(GL_TRIANGLES, _rgs[i].offset, _rgs[i].numVertexes);
-	}
+    for(const auto& e : _rgs) {
+        glBindTexture(GL_TEXTURE_2D, e.texture);
+        glDrawArrays(GL_TRIANGLES, e.offset, e.numVertexes);
+    }
 
 	glBindVertexArray(0);
 }

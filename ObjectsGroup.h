@@ -51,7 +51,7 @@ public:
 	void post();
 	void addInGroup(const glm::vec4& destRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color);
 	void addInGroupCenter(const glm::vec4& centerRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color);
-	void addInGroupTransform(const glm::vec4& centerRect, const glm::vec4& uvRect, glm::mat2x2 trMat, GLuint texture, float depth, const Color& color);
+	void addInGroupTransform(const glm::vec4& centerRect, const glm::vec4& uvRect, const glm::mat2x2& trMat, GLuint texture, float depth, const Color& color);
 	void renderGroup();
 
 private:
