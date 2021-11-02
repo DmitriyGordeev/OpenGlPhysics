@@ -10,9 +10,11 @@ glm::vec2 Math2D::vec2rand()
 	return v;
 }
 
-float Math2D::getAngle(glm::vec2 vector2D)
+float Math2D::getAngle(const glm::vec2& vector2D)
 {
 	float v = glm::length(vector2D);
+
+    // todo: refactor this function
 
 	if (v == 0.0f)
 		return 0.0f;
@@ -64,7 +66,7 @@ float Math2D::distLineDot(glm::vec2 A, glm::vec2 B, glm::vec2 Dot)
 	return abs(Dot.y);
 }
 
-void Math2D::showVec(std::string name, glm::vec2 vec)
+void Math2D::showVec(const std::string& name, const glm::vec2& vec)
 {
 	std::cout << name + "= " << vec.x << " " << vec.y << std::endl;
 }

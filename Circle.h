@@ -23,9 +23,9 @@ public:
 		_boundType = HitboxType::CIRCLE;
 	}
 
-	~Circle() = default;
+	~Circle() override = default;
 
-	glm::vec2 getCenter() const { return glm::vec2(_geo.x, _geo.y); }
+	glm::vec2 getCenter() const { return {_geo.x, _geo.y}; }
 	float getRadius() const { return _geo.z / 2; }
 
 	void lineReflection(const glm::vec2& A, const glm::vec2& B) override;

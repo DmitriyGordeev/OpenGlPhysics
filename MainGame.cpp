@@ -189,7 +189,7 @@ void MainGame::drawGame()
 	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
 	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
-	//Draws all figure
+	// Draws all figures
     _objectsGroup.cleanUp();
 	_figuresDraw();
 	_objectsGroup.post();
