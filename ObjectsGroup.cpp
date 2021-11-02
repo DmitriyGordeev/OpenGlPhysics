@@ -255,13 +255,10 @@ void ObjectsGroup::_createVertexArray()
 
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-	//Attributes of vertex
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 
-	//Where our vertexData in vertexBuffer
-	//index, dimensions, type, is_normalize?, stride, pointer (offset in bytes) 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, pos));
 	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));

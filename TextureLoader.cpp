@@ -3,15 +3,11 @@
 #include <iostream>
 
 //TextureCache:
-TextureCache::TextureCache()
-{
-}
+TextureCache::TextureCache() = default;
 
-TextureCache::~TextureCache()
-{
-}
+TextureCache::~TextureCache() = default;
 
-GLTexture TextureCache::getTexture(std::string texturePath)
+GLTexture TextureCache::getTexture(const std::string& texturePath)
 {
 	auto mit = _textureMap.find(texturePath);
 
@@ -33,7 +29,7 @@ GLTexture TextureCache::getTexture(std::string texturePath)
 //TextureLoader:
 TextureCache TextureLoader::_textureCache;
 
-GLTexture TextureLoader::getTexture(std::string texturePath)
+GLTexture TextureLoader::getTexture(const std::string& texturePath)
 {
 	return _textureCache.getTexture(texturePath);
 }
