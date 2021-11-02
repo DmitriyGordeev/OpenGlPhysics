@@ -30,8 +30,6 @@ public:
 	void drawGame();
 
 private:
-	void _figuresDraw();
-
 	int _screenWidth;
 	int _screenHeight;
 	SDL_Window* _window;
@@ -42,11 +40,7 @@ private:
 	InputManager _input;
 
 	ObjectsGroup _objectsGroup;
-
     Scene* _scene;
-
-//	std::vector<Figure*> _pFigures;
-//	Box* _groundBox;
 
 	float _time;
 	float _dt;
