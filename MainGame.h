@@ -12,6 +12,7 @@
 #include "ObjectsGroup.h"
 #include "Box.h"
 #include "Circle.h"
+#include "Scene.h"
 
 enum class GameState {PLAY, EXIT};
  
@@ -42,9 +43,10 @@ private:
 
 	ObjectsGroup _objectsGroup;
 
-	std::vector<Figure*> _pFigures;
+    Scene* _scene;
 
-	Box* _groundBox;
+//	std::vector<Figure*> _pFigures;
+//	Box* _groundBox;
 
 	float _time;
 	float _dt;

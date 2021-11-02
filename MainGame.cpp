@@ -8,7 +8,6 @@
 
 #include <gtx\transform.hpp>
 
-float TEST_ANGLE = 0.0;
 
 MainGame::MainGame()
 {
@@ -17,33 +16,38 @@ MainGame::MainGame()
 	_screenHeight = 640;
 	_gameState = GameState::PLAY;
 	_camera.init(_screenWidth, _screenHeight);
+    _scene = nullptr;
 	_time = 0.0f;
 	_dt = 0.01f;
 }
 
 MainGame::~MainGame()
 {
+    delete _scene;
+//    TODO
 }
 
 void MainGame::run()
 {
-	_pFigures.push_back(new Circle(-100.0f, 1500.0f, 50.0f));
-	_pFigures[0]->setVel(0.0f, -0.1f);
 
-    //_pFigures.push_back(new Circle(-1500.0f, 200, 50.0f));
-    //_pFigures[0]->setVel(3.0f, 0.0f);
-
-    _pFigures[0]->setMass(5.0f);
-
-    _pFigures.push_back(new Box(100.0f, 300.0f, 500.0f, 400.0f));
-    _pFigures[1]->setAngle(M_PI / 19);
-//    _pFigures[1]->setMass(2.0f);
-//    _pFigures[1]->setVel(0.0f, -0.1f);
-
-    _groundBox = new Box(0.0f, -750.0f, 3000.0f, 1500.0f);
-    _groundBox->setAngle(TEST_ANGLE);
+//	_pFigures.push_back(new Circle(-100.0f, 1500.0f, 50.0f));
+//	_pFigures[0]->setVel(0.0f, -0.1f);
+//
+//    //_pFigures.push_back(new Circle(-1500.0f, 200, 50.0f));
+//    //_pFigures[0]->setVel(3.0f, 0.0f);
+//
+//    _pFigures[0]->setMass(5.0f);
+//
+//    _pFigures.push_back(new Box(100.0f, 300.0f, 500.0f, 400.0f));
+//    _pFigures[1]->setAngle(M_PI / 19);
+////    _pFigures[1]->setMass(2.0f);
+////    _pFigures[1]->setVel(0.0f, -0.1f);
+//
+//    _groundBox = new Box(0.0f, -750.0f, 3000.0f, 1500.0f);
+//    _groundBox->setAngle(TEST_ANGLE);
 
     initSystems();
+    _scene->setup();
     gameLoop();
 }
 
@@ -82,6 +86,7 @@ void MainGame::initSystems()
 
 	initShaders();
 	_objectsGroup.init();
+    _scene = new Scene(&_objectsGroup);
 }
 
 void MainGame::initShaders()
@@ -191,7 +196,8 @@ void MainGame::drawGame()
 
 	// Draws all figures
     _objectsGroup.cleanUp();
-	_figuresDraw();
+//	_figuresDraw();
+    _scene->draw();
 	_objectsGroup.post();
 	_objectsGroup.renderGroup();
 
@@ -204,21 +210,21 @@ void MainGame::drawGame()
 
 void MainGame::_figuresDraw()
 {
-	//_pFigures[0]->collision(_groundBox);
-	_pFigures[0]->collision(_pFigures[1]);
-
-	for (int i = 0; i < 1; i++) {
-        //_pFigures[i]->lineReflection(glm::vec2(-1500.0f, -1500 * tanf(TEST_ANGLE)), glm::vec2(1500.0f, 1500 * tanf(TEST_ANGLE)));
-        _pFigures[i]->applyForce(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass());
-        //std::cout << "gravity:" << glm::length(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass()) << std::endl;
-        _pFigures[i]->move();
-        _pFigures[i]->rotate();
-    }
-
-
-	//Drawing all objects on the scene:
-	_groundBox->draw(_objectsGroup);
-	for (int i = 0; i < _pFigures.size(); i++)
-		_pFigures[i]->draw(_objectsGroup);
-		
+//	//_pFigures[0]->collision(_groundBox);
+//	_pFigures[0]->collision(_pFigures[1]);
+//
+//	for (int i = 0; i < 1; i++) {
+//        //_pFigures[i]->lineReflection(glm::vec2(-1500.0f, -1500 * tanf(TEST_ANGLE)), glm::vec2(1500.0f, 1500 * tanf(TEST_ANGLE)));
+//        _pFigures[i]->applyForce(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass());
+//        //std::cout << "gravity:" << glm::length(glm::vec2(0.0f, -_pFigures[i]->grav) * _pFigures[i]->mass()) << std::endl;
+//        _pFigures[i]->move();
+//        _pFigures[i]->rotate();
+//    }
+//
+//
+//	//Drawing all objects on the scene:
+//	_groundBox->draw(_objectsGroup);
+//	for (int i = 0; i < _pFigures.size(); i++)
+//		_pFigures[i]->draw(_objectsGroup);
+//
 }
