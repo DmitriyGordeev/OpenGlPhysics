@@ -9,13 +9,13 @@ public:
 	~Shaders();
 
 	void compile(const std::string& vertexShader, const std::string& pixelShader);
-	void link();
+	void link() const;
 	void addAttribute(const std::string& attributeName);
 
-	GLuint getUniformLocation(const std::string& uniformName);
+	GLuint getUniformLocation(const std::string& uniformName) const;
 
-	void use();
-	void unuse();
+	void use() const;
+	void unuse() const;
 
 private:
 	int _numAttributes;
@@ -23,6 +23,6 @@ private:
 	GLuint _vertexShaderID;
 	GLuint _pixelShaderID;
 
-	void _compileSingleShader(const std::string& shaderFilename, GLuint id);
+	static void _compileSingleShader(const std::string& shaderFilename, GLuint id);
 };
 

@@ -28,12 +28,8 @@ struct Object
 class RenderGroup
 {
 public:
-	RenderGroup(GLuint Offset, GLuint NV, GLuint Texture)
-	{
-		offset = Offset;
-        numVertexes = NV;
-		texture = Texture;
-	}
+	RenderGroup(GLuint Offset, GLuint NV, GLuint Texture):
+            offset(Offset), numVertexes(NV), texture(Texture) {}
 
 	GLuint offset;
 	GLuint numVertexes;

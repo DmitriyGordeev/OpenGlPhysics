@@ -4,13 +4,9 @@
 #include <vector>
 #include <fstream>
 
-Shaders::Shaders() : _numAttributes(0), _shaderProgramID(0), _vertexShaderID(0), _pixelShaderID(0)
-{
-}
+Shaders::Shaders() : _numAttributes(0), _shaderProgramID(0), _vertexShaderID(0), _pixelShaderID(0) {}
 
-Shaders::~Shaders()
-{
-}
+Shaders::~Shaders() = default;
 
 void Shaders::compile(const std::string& vertexShader, const std::string& pixelShader)
 {
@@ -32,7 +28,7 @@ void Shaders::compile(const std::string& vertexShader, const std::string& pixelS
 	_compileSingleShader(pixelShader, _pixelShaderID);
 }
 
-void Shaders::link()
+void Shaders::link() const
 {
 	//Attaching shaders to program
 	glAttachShader(_shaderProgramID, _vertexShaderID);
@@ -73,7 +69,7 @@ void Shaders::link()
 	glDeleteShader(_pixelShaderID);
 }
 
-GLuint Shaders::getUniformLocation(const std::string& uniformName)
+GLuint Shaders::getUniformLocation(const std::string& uniformName) const
 {
 	GLuint location = glGetUniformLocation(_shaderProgramID, uniformName.c_str());
 	if (location == GL_INVALID_INDEX)
@@ -87,7 +83,7 @@ void Shaders::addAttribute(const std::string& attributeName)
 	glBindAttribLocation(_shaderProgramID, _numAttributes++, attributeName.c_str());
 }
 
-void Shaders::use()
+void Shaders::use() const
 {
 	//Using shader
 	glUseProgram(_shaderProgramID);
@@ -97,7 +93,7 @@ void Shaders::use()
 		glEnableVertexAttribArray(i);
 }
 
-void Shaders::unuse()
+void Shaders::unuse() const
 {
 	//Stop using program
 	glUseProgram(0);
@@ -114,7 +110,7 @@ void Shaders::_compileSingleShader(const std::string& shaderFilename, GLuint id)
 	if (shaderFile.fail())
 		fatal("Error: Failed to open " + shaderFilename);
 
-	std::string fileContent = "";
+	std::string fileContent;
 	std::string line;
 	while (std::getline(shaderFile, line))
 		fileContent += line + "\n";

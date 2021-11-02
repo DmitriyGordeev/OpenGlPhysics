@@ -15,7 +15,9 @@ MainGame::MainGame()
 	_screenWidth = 640;
 	_screenHeight = 640;
 	_gameState = GameState::PLAY;
-	_camera.init(_screenWidth, _screenHeight);
+    _camera = new Camera2D;
+	_camera->init(_screenWidth, _screenHeight);
+    _input = new InputManager;
     _scene = nullptr;
 	_time = 0.0f;
 	_dt = 0.01f;
@@ -23,8 +25,10 @@ MainGame::MainGame()
 
 MainGame::~MainGame()
 {
+    delete _camera;
+    delete _shader;
     delete _scene;
-//    TODO
+    delete _input;
 }
 
 void MainGame::run()
@@ -74,11 +78,12 @@ void MainGame::initSystems()
 
 void MainGame::initShaders()
 {
-	_shader.compile("shaders/shader.vs", "shaders/shader.ps");
-	_shader.addAttribute("vertexPosition");
-	_shader.addAttribute("vertexColor");
-	_shader.addAttribute("vertexUV");
-	_shader.link();
+    _shader = new Shaders;
+	_shader->compile("shaders/shader.vs", "shaders/shader.ps");
+	_shader->addAttribute("vertexPosition");
+	_shader->addAttribute("vertexColor");
+	_shader->addAttribute("vertexUV");
+	_shader->link();
 }
 
 void MainGame::processInput()
@@ -96,51 +101,51 @@ void MainGame::processInput()
 			break;
 
 		case SDL_MOUSEMOTION:
-			_input.setMouseCoords(_event.motion.x, _event.motion.y);
+			_input->setMouseCoords(_event.motion.x, _event.motion.y);
 			break;
 
 		case SDL_KEYDOWN:
-			_input.pressKey(_event.key.keysym.sym);
+			_input->pressKey(_event.key.keysym.sym);
 			break;
 
 		case SDL_KEYUP:
-			_input.releaseKey(_event.key.keysym.sym);
+			_input->releaseKey(_event.key.keysym.sym);
 			break;
 
 		case SDL_MOUSEBUTTONDOWN:
-			_input.pressKey(_event.button.button);
+			_input->pressKey(_event.button.button);
 			break;
 
 		case SDL_MOUSEBUTTONUP:
-			_input.releaseKey(_event.button.button);
+			_input->releaseKey(_event.button.button);
 			break;
 
 		}
 	}
 
 	//Keys process input
-	if (_input.isKeyPressed(SDLK_w))
-		_camera.setPosition(_camera.getPos() + glm::vec2(0.0, CamSpeed));
+	if (_input->isKeyPressed(SDLK_w))
+		_camera->setPosition(_camera->getPos() + glm::vec2(0.0, CamSpeed));
 
-	if (_input.isKeyPressed(SDLK_s))
-		_camera.setPosition(_camera.getPos() + glm::vec2(0.0, -CamSpeed));
+	if (_input->isKeyPressed(SDLK_s))
+		_camera->setPosition(_camera->getPos() + glm::vec2(0.0, -CamSpeed));
 
-	if (_input.isKeyPressed(SDLK_a))
-		_camera.setPosition(_camera.getPos() + glm::vec2(-CamSpeed, 0.0));
+	if (_input->isKeyPressed(SDLK_a))
+		_camera->setPosition(_camera->getPos() + glm::vec2(-CamSpeed, 0.0));
 
-	if (_input.isKeyPressed(SDLK_d))
-		_camera.setPosition(_camera.getPos() + glm::vec2(CamSpeed, 0.0));
+	if (_input->isKeyPressed(SDLK_d))
+		_camera->setPosition(_camera->getPos() + glm::vec2(CamSpeed, 0.0));
 
-	if (_input.isKeyPressed(SDLK_q))
-		_camera.setScale(_camera.getScale() - ScaleSpeed);
+	if (_input->isKeyPressed(SDLK_q))
+		_camera->setScale(_camera->getScale() - ScaleSpeed);
 
-	if (_input.isKeyPressed(SDLK_e))
-		_camera.setScale(_camera.getScale() + ScaleSpeed);
+	if (_input->isKeyPressed(SDLK_e))
+		_camera->setScale(_camera->getScale() + ScaleSpeed);
 
-	if (_input.isKeyPressed(SDL_BUTTON_LEFT))
+	if (_input->isKeyPressed(SDL_BUTTON_LEFT))
 	{
-		glm::vec2 mouseCoords = _input.getMouseCoords();
-		_camera.convertToWorldCoords(mouseCoords);
+		glm::vec2 mouseCoords = _input->getMouseCoords();
+		_camera->convertToWorldCoords(mouseCoords);
 	}
 }
 
@@ -151,7 +156,7 @@ void MainGame::gameLoop()
 		_time += _dt;
 
 		processInput();
-		_camera.update();
+		_camera->update();
 		drawGame();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -165,16 +170,16 @@ void MainGame::drawGame()
 	//Clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	_shader.use();
+	_shader->use();
 
 	glActiveTexture(GL_TEXTURE0);
 
 	//Get texture variable from shaders
-	GLint textureLocation = _shader.getUniformLocation("mySampler");
+	GLint textureLocation = _shader->getUniformLocation("mySampler");
 	glUniform1i(textureLocation, 0);
 
-	GLint pLocation = _shader.getUniformLocation("P");
-	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
+	GLint pLocation = _shader->getUniformLocation("P");
+	glm::mat4 cameraMatrix = _camera->getCameraMatrix();
 	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
 	// Draws all figures
@@ -184,7 +189,7 @@ void MainGame::drawGame()
 	_objectsGroup.renderGroup();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-	_shader.unuse();
+	_shader->unuse();
 
 	//swap buffers and draw everything on the screen
 	SDL_GL_SwapWindow(_window);

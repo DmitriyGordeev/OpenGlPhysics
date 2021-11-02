@@ -35,9 +35,9 @@ private:
 	SDL_Window* _window;
 	GameState _gameState;
 
-	Shaders _shader;
-	Camera2D _camera;
-	InputManager _input;
+	Shaders* _shader;
+	Camera2D* _camera;
+	InputManager* _input;
 
 	ObjectsGroup _objectsGroup;
     Scene* _scene;
